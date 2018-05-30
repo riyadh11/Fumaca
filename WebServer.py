@@ -13,7 +13,7 @@ DATABASE_PORT = 27171
 @app.route('/sensor', methods=['GET'])
 def handle_get():
     Database = DatabaseHandler(DATABASE_IP, DATABASE_PORT,"smartSystem")
-    logs = list(Database.findBulkDocument("sensor", select={"_id":False}, sort={"datetime":-1}, limit=60))
+    logs = list(Database.findBulkDocument("sensor", select={"_id":False}, sort=[("datetime",-1)], limit=60))
     return jsonify(Sensor=logs)
 
 @app.route('/sensor', methods=['POST'])

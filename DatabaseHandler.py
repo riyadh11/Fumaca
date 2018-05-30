@@ -26,6 +26,6 @@ class DatabaseHandler:
         c = self.getCollection(collection)
         return c.insert_many(data)
 
-    def findBulkDocument(self, collection, find={}, select={}, sort={}, limit=999):
+    def findBulkDocument(self, collection, find={}, select={}, sort=[("_id", 1)], limit=999):
         c = self.getCollection(collection)
-        return c.find(find, select).sort({}).limit(limit)
+        return c.find(find, select).sort(sort).limit(limit)
