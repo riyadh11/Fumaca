@@ -2,7 +2,7 @@
 ### Ahmad Riyadh Al Faathin - 155150207111052 - SKT C - Faathin.com ###
 # Import library paho mqtt
 import paho.mqtt.client as mqtt_client
-import socket, json, struct
+import socket, json, struct, datetime
 from sys import argv, exit
 
 # Fungsi untuk handle message yang masuk
@@ -15,10 +15,12 @@ def handle_message(mqttc, obj, msg):
 
 # Fungsi menyimpan data
 def collect_data(payload):
-    if(len(data)<MAX_MESSAGE):
-        data.append(json.loads(payload))
-    else:
-        send_msg(json.dumps(data).encode('utf-8'))
+    payload = json.loads(payload)
+    payload['datetime']=datetime.datetime.now()
+    data.append(payload)
+
+    if(len(data)>=MAX_MESSAGE):
+        send_msg(json.dumps(data, indent=4, sort_keys=True, default=str).encode('utf-8'))
         data[:] = []
         print ("[LOG] Sending Data")
 
@@ -40,7 +42,7 @@ if __name__ == "__main__":
         exit()
 
     # Define Broker
-    BROKER_IP = "192.168.10.11"
+    BROKER_IP = "13.67.76.30"
     BROKER_PORT = 1883
 
     # Define Receiver

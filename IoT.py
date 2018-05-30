@@ -13,7 +13,7 @@ if __name__ == "__main__":
         exit()
 
     # Define Broker
-    BROKER_IP = "192.168.10.11"
+    BROKER_IP = "13.67.76.30"
     BROKER_PORT = 1883
     
     # Inisiasi client sebagai publisher
@@ -29,7 +29,6 @@ if __name__ == "__main__":
         oxygen=random.randint(70,75)
         ph=random.randint(4,7)
         pressure=random.randint(1000,10015)
-        date=datetime.datetime.now().strftime("%H:%M:%S %d/%m/%Y")
 
         data={
             'temperature':temperature,
@@ -38,7 +37,6 @@ if __name__ == "__main__":
             'ph':ph,
             'pressure':pressure,
             'identifier':argv[1],
-            'date':date
             }
         
         pub.publish("/sensor/"+argv[1], json.dumps(data))
