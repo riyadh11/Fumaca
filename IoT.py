@@ -24,18 +24,20 @@ if __name__ == "__main__":
 
     # Publish message
     while True:
-        temperature=random.randint(31,35)
-        humidity=random.randint(65,79)
-        oxygen=random.randint(70,75)
-        ph=random.randint(4,7)
-        pressure=random.randint(1000,10015)
+        asap=random.randint(21,35)
+        karbon=random.randint(65,79)
+        ozon=random.randint(140,200)
+        sulfur=random.randint(29,35)
+        nitrogen=random.randint(100,150)
+        suhu=random.randint(29,31)
 
         data={
-            'temperature':temperature,
-            'humidity':humidity,
-            'oxygen':oxygen,
-            'ph':ph,
-            'pressure':pressure,
+            'asap':asap,
+            'karbon':karbon,
+            'ozon':ozon,
+            'sulfur':sulfur,
+            'nitrogen':nitrogen,
+            'suhu':suhu,
             'identifier':argv[1],
             }
         

@@ -11,7 +11,8 @@ def handle_message(mqttc, obj, msg):
     topic = msg.topic
     payload = msg.payload
     payload = payload.decode('utf-8')
-    collect_data(payload)
+    if payload != "gfgf":
+        collect_data(payload)
 
 # Fungsi menyimpan data
 def collect_data(payload):
@@ -42,12 +43,14 @@ if __name__ == "__main__":
         exit()
 
     # Define Broker
-    BROKER_IP = "13.67.76.30"
+    BROKER_IP = "ngehubx.online"
     BROKER_PORT = 1883
 
     # Define Receiver
-    RECEIVER_IP = "192.168.10.11"
+    RECEIVER_IP = "192.168.10.14"
     RECEIVER_PORT = 5555
+
+    COUNTER = 0
 
     # Inisiasi client mqtt sebagai subscriber
     sub = mqtt_client.Client()
@@ -71,7 +74,7 @@ if __name__ == "__main__":
     sub.on_message = handle_message
 
     # Subscribe ke sebuah topik
-    sub.subscribe("/sensor/#")
+    sub.subscribe("project/dataSensor")
 
     print ('[Info] Subscribe at {} sensor'.format(str(NODES)))
 

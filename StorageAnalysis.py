@@ -14,10 +14,10 @@ if __name__ == "__main__":
         print ("Usage : python StorageAnalysis.py <Minute>")
         exit()
 
-    STORAGE_IP = "127.0.0.1"
+    STORAGE_IP = "192.168.10.11"
     STORAGE_PORT = 9000
 
-    DATABASE_IP = "127.0.0.1"
+    DATABASE_IP = "192.168.10.11"
     DATABASE_PORT = 27017
 
     print ("[Info] System Running and automatic dump database for every {} minutes".format(argv[1]))
@@ -25,11 +25,11 @@ if __name__ == "__main__":
     while 1:
         try:
             print ("[LOG] Start Dump Data")
-            logs = list(Database.findBulkDocument("sensor",select={"_id":False}))
+            logs = list(Database.findBulkDocument("sensor",select={"_id":False}, sort=[("datetime",-1)], limit=60*int(argv[1])))
             
             # Writing Data
             Storage = StorageHandler(STORAGE_IP, STORAGE_PORT)
-            directory = "/Analysis/"+datetime.datetime.now().strftime("%d%m%y")
+            directory = "/sensor/"+datetime.datetime.now().strftime("%d%m%y")
             fileName = datetime.datetime.now().strftime("%H%M") + ".json"
             jsonData = json.dumps(json.loads(dumps(logs)))#, sort_keys=False,indent=4, separators=(',', ': '))
             Storage.write(directory+"/"+fileName, "w", jsonData)

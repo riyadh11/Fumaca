@@ -54,8 +54,8 @@ if __name__ == "__main__":
     RECEIVER_PORT = 5555
 
     # Define Database
-    DATABASE_IP = "127.0.0.1"
-    DATABASE_PORT = 27017
+    DATABASE_IP = "10.11.12.13"
+    DATABASE_PORT = 27171
 
 serversock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serversock.setblocking(0)
