@@ -52,7 +52,7 @@ Then, Start the Analysis Process
 
 `$ python AnalysisProcess.py 10`
 
-Note the number of minute in Storage Analysis process and Analysis process must be same.
+##### Note: the number of minute in Storage Analysis process and Analysis process must be same.
 
 Then, Start Web server using Flask
 
