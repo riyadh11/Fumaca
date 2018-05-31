@@ -24,6 +24,7 @@ if __name__ == "__main__":
 
     # Publish message
     while True:
+        # Dummy data, for testing purpose only
         asap=random.randint(21,35)
         karbon=random.randint(65,79)
         ozon=random.randint(140,200)

@@ -1,11 +1,15 @@
+#!/usr/bin/python
+### Ahmad Riyadh Al Faathin - 155150207111052 - SKT C - Faathin.com ###
+#Import Library pyspark
 from pyspark import SparkConf, SparkContext
 from pyspark.sql.session import SparkSession
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, avg
 import json, datetime,time
+from sys import argv, path
+path.insert(0,"../Common/")
 from DatabaseHandler import DatabaseHandler
-from sys import argv
 
 if __name__ == "__main__":
      
@@ -14,6 +18,7 @@ if __name__ == "__main__":
         exit()
     
     print ("[Info] System Running and automatic processing data for every {} minutes".format(argv[1]))
+    
     DATABASE_IP = "192.168.10.11"
     DATABASE_PORT = 27017
 
@@ -27,15 +32,15 @@ if __name__ == "__main__":
             fileName = datetime.datetime.now().strftime("%H%M") + ".json"
 
             df = spark.read.json("hdfs://master:9000/sensor/{}/{}".format(directory,fileName))
-            #df = spark.read.json("file:///vagrant/sempak/sensor_pyspark.json")
-
+            
             #AVG
-            avg1 = df.agg({'sulfur' : 'avg'}).collect()[0][0]
-            avg2 = df.agg({'asap' : 'avg'}).collect()[0][0]
-            avg3 = df.agg({'karbon' : 'avg'}).collect()[0][0]
-            avg4 = df.agg({'ozon' : 'avg'}).collect()[0][0]
-            avg5 = df.agg({'nitrogen' : 'avg'}).collect()[0][0]
-            average = {"sulfur" : avg1, "asap" : avg2, "karbon" : avg3, "ozon" : avg4, "nitrogen" : avg5}
+            avgSulfur = df.agg({'sulfur' : 'avg'}).collect()[0][0]
+            avgAsap = df.agg({'asap' : 'avg'}).collect()[0][0]
+            avgKarbon = df.agg({'karbon' : 'avg'}).collect()[0][0]
+            avgOzon = df.agg({'ozon' : 'avg'}).collect()[0][0]
+            avgNitrogen = df.agg({'nitrogen' : 'avg'}).collect()[0][0]
+            avgSuhu = df.agg({'suhu' : 'avg'}).collect()[0][0]
+            average = {"sulfur" : avgSulfur, "asap" : avgAsap, "karbon" : avgKarbon, "ozon" : avgOzon, "nitrogen" : avgNitrogen, "suhu" : avgSuhu}
 
             #MAX
             maxSulfur = df.agg({'sulfur' : 'max'}).collect()[0][0]
@@ -43,7 +48,8 @@ if __name__ == "__main__":
             maxKarbon = df.agg({'karbon' : 'max'}).collect()[0][0]
             maxOzon = df.agg({'ozon' : 'max'}).collect()[0][0]
             maxNitrogen = df.agg({'nitrogen' : 'max'}).collect()[0][0]
-            max = {"sulfur" : maxSulfur, "asap" : maxAsap, "karbon" : maxKarbon, "ozon" : maxOzon, "nitrogen" : maxNitrogen}
+            maxSuhu = df.agg({'suhu' : 'max'}).collect()[0][0]
+            max = {"sulfur" : maxSulfur, "asap" : maxAsap, "karbon" : maxKarbon, "ozon" : maxOzon, "nitrogen" : maxNitrogen, "suhu": maxSuhu}
 
             #MIN
             minSulfur = df.agg({'sulfur' : 'min'}).collect()[0][0]
@@ -51,7 +57,8 @@ if __name__ == "__main__":
             minKarbon = df.agg({'karbon' : 'min'}).collect()[0][0]
             minOzon = df.agg({'ozon' : 'min'}).collect()[0][0]
             minNitrogen = df.agg({'nitrogen' : 'min'}).collect()[0][0]
-            min = {"sulfur" : minSulfur, "asap" : minAsap, "karbon" : minKarbon, "ozon" : minOzon, "nitrogen" : minNitrogen}
+            minSuhu = df.agg({'suhu' : 'min'}).collect()[0][0]
+            min = {"sulfur" : minSulfur, "asap" : minAsap, "karbon" : minKarbon, "ozon" : minOzon, "nitrogen" : minNitrogen, "suhu": minSuhu}
 
             hasil = {"average":average, "max":max, "min":min, "datetime":datetime.datetime.now()}
 

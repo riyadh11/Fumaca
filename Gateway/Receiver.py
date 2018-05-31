@@ -2,9 +2,9 @@
 # Ahmad Riyadh Al Faathin - 155150207111052 - SKT C - Faathin.com ###
 # Import library mqtt, random, json, time
 import socket,threading,signal,sys, struct,json, datetime, os, errno, select, signal
-from sys import argv
+from sys import argv, path
+path.insert(0,"../Common/")
 from DatabaseHandler import DatabaseHandler
-#from StorageHandler import StorageHandler
     
 def handle_socket(conn):
     try :

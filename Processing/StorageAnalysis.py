@@ -1,11 +1,12 @@
 #!/usr/bin/python
 ### Ahmad Riyadh Al Faathin - 155150207111052 - SKT C - Faathin.com ###
 # Import Class DatabaseHandler 
-from DatabaseHandler import DatabaseHandler
-from StorageHandler import StorageHandler
-from sys import argv, exit
+from sys import argv, exit, path
 from bson.json_util import dumps
 import json, time, datetime
+path.insert(0,"../Common/")
+from DatabaseHandler import DatabaseHandler
+from StorageHandler import StorageHandler
 
 #main function
 if __name__ == "__main__":

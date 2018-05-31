@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ### Ahmad Riyadh Al Faathin - 155150207111052 - SKT C - Faathin.com ###
 # Import library pymongo
 from pymongo import MongoClient

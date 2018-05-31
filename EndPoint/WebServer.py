@@ -1,8 +1,12 @@
+#!/usr/bin/python
+### Ahmad Riyadh Al Faathin - 155150207111052 - SKT C - Faathin.com ###
+# Import library Flask, Database Handler and Bson
+from sys import path
 from flask import Flask,jsonify,json
-from DatabaseHandler import DatabaseHandler
 from flask_cors import CORS
 from bson.json_util import dumps
-#import json
+path.insert(0,"../Common/")
+from DatabaseHandler import DatabaseHandler
 
 app = Flask("Sensor App")
 CORS(app)
