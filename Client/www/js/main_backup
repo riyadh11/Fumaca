@@ -1,0 +1,181 @@
+// chart
+window.onload = function () {
+		var dataPoints = []
+	      var dataPointsKarbon = [];
+	      var dataPointsAsap = [];
+	      var dataPointsNitro = [];
+	      var dataPointsOzon = [];
+	      var dataPointsSuhu = [];
+	      var dataPointsSulfur = [];
+	      
+	      
+	      var chart = new CanvasJS.Chart("chartContainer",{
+	      	zoomEnabled: true,
+	      	title :{
+	      		text: "Live Data"
+	      	},
+	      	axisX: {						
+	      		title: "Waktu"
+	      	},
+	      	axisY: {						
+	      		title: "Tingkat Pencemaran Udara"
+	      	},
+	      	data: [
+		      	{
+		      		type: "spline",
+					name: "Asap",
+					showInLegend: true,
+					dataPoints: dataPointsAsap
+		      	},
+		      	{
+		      		type: "spline",  
+					name: "Karbon",        
+					showInLegend: true,
+					dataPoints: dataPointsKarbon
+		      	},
+		      	{
+		      		type: "spline",
+					name: "Nitrogen",
+					showInLegend: true,
+					dataPoints: dataPointsNitro
+		      	},
+		      	{
+		      		type: "spline",  
+					name: "Ozon",        
+					showInLegend: true,
+					dataPoints: dataPointsOzon
+		      	},
+		      	{
+		      		type: "spline",  
+					name: "Suhu",        
+					showInLegend: true,
+					dataPoints: dataPointsSuhu
+		      	},
+		      	{
+		      		type: "spline",  
+					name: "Sulfur",        
+					showInLegend: true,
+					dataPoints: dataPointsSulfur
+		      	}
+	      	]
+
+	      });
+
+	      var chart = new CanvasJS.Chart("chartAsap",{
+	      	title :{
+	      		text: "Asap"
+	      	},
+	      	axisX: {						
+	      		title: "Waktu"
+	      	},
+	      	axisY: {						
+	      		title: "Tingkat Asap"
+	      	},
+	      	data: [
+		      	{
+		      		type: "splineArea",
+					name: "Asap",
+					showInLegend: true,
+					dataPoints: dataPointsAsap
+		      	}
+	      	]
+	      });
+
+	     var xVal = dataPointsKarbon.length + 1;
+	      // var yVal = 15;	
+	      // var updateInterval = 1000;
+	     function addData(data) {
+			for (var i = 0; i < data.length; i++) {
+				dataPointsKarbon.push({
+					y: data[i].karbon
+				});
+				dataPointsAsap.push({
+					y: data[i].asap
+				});
+				dataPointsNitro.push({
+					y: data[i].nitrogen
+				});
+				dataPointsOzon.push({
+					y: data[i].ozon
+				});
+				dataPointsSuhu.push({
+					y: data[i].suhu
+				});
+				dataPointsSulfur.push({
+					y: data[i].sulfur
+				});
+
+				if (dataPointsKarbon.length >  10 )
+		      	{
+		      		dataPointsKarbon.shift();		
+		      		dataPointsAsap.shift();	
+		      		dataPointsNitro.shift();
+		      		dataPointsOzon.shift();
+		      		dataPointsSuhu.shift();
+		      		dataPointsSulfur.shift();
+		      	}
+			}
+			chart.render();
+
+		}
+
+		var updateChart = function () {
+	      	$.getJSON("http://13.67.76.30/sensor", function(data){
+	      	for (var i = 0; i < data.length; i++) {
+				dataPointsKarbon.push({
+					y: data[i].karbon
+				});
+				dataPointsAsap.push({
+					y: data[i].asap
+				});
+				dataPointsNitro.push({
+					y: data[i].nitrogen
+				});
+				dataPointsOzon.push({
+					y: data[i].ozon
+				});
+				dataPointsSuhu.push({
+					y: data[i].suhu
+				});
+				dataPointsSulfur.push({
+					y: data[i].sulfur
+				});
+
+				if (dataPointsKarbon.length >  20 )
+		      	{
+		      		dataPointsKarbon.shift();		
+		      		dataPointsAsap.shift();	
+		      		dataPointsNitro.shift();
+		      		dataPointsOzon.shift();
+		      		dataPointsSuhu.shift();
+		      		dataPointsSulfur.shift();
+		      	}
+			}
+	      	
+	      	chart.render();
+	      });
+	};
+
+// $.getJSON("http://127.0.0.1:7777/sensor", addData);
+setInterval(function(){updateChart()}, 1000); 
+	  
+	}
+
+	//       var updateChart = function () {
+	//       	$.getJSON("http://127.0.0.1:7777/sensor", function(result){
+	//       	for (var i = 0; i < result.length; i++) {
+	//       		dataPoints.push({
+	//       			x: xVal,
+	//       			y: result[i].temperature
+	//       		});
+	//       		xVal++;
+	//       		if (dataPoints.length >  10 )
+	// 	      	{
+	// 	      		dataPoints.shift();				
+	// 	      	}
+	//       	}
+	      	
+	//       	chart.render();
+	//       });
+	// };
+

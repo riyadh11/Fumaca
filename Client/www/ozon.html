@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<title>SKT</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="css/all.css" >
+		<link rel="stylesheet" href="css/semantic.min.css">
+	</head>
+	<body>
+		<div class="ui sidebar red inverted vertical menu">
+			<a class="padded item">
+				<i class="fas fa-user fa-3x"></i>
+			</a>
+			<a class="item" href="index.html">
+				Home
+			</a>
+			<a class="item" href="asap.html">
+				Asap
+			</a>
+			<a class="item" href="karbon.html">
+				Karbon
+			</a>
+			<a href="ozon.html" class="red item">
+				Ozon
+			</a>
+			<a href="sulfur.html" class="red item">
+				Sulfur
+			</a>
+			<a href="nitrogen.html" class="red item">
+				Nitrogen
+			</a>
+			<a href="suhu.html" class="red item">
+				Suhu
+			</a>
+		</div>
+		<div class="pusher">
+			<div class="ui red inverted menu" style="border-radius: 0%;">
+				<div class="ui container">
+					<a class="item" id="openmenu">
+						<i class="fas fa-bars"></i>
+					</a>
+					<center>
+						<a class="item">
+							<h2>SMOQ</h2>
+						</a>
+					</center>
+					<a class="right item">
+						<i class="fas fa-cog"></i>
+					</a>
+				</div>
+			</div>
+
+<div class="ui container" style="min-height: 100vh">
+	<canvas id="chartContainer" style="height: 400px; width: 100%;">
+	</canvas>
+	<div class="ui large header">
+		<center>
+			Keterangan
+		</center>
+	</div>
+	<table class="ui definition unstackable table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Max</th>
+				<th>Min</th>
+				<th>Rata Rata</th>
+			</tr>
+		</thead>
+		<tbody id="tbl-home">
+			
+		</tbody>
+	</table>
+
+</div>
+
+<footer>
+	<div class="ui segment">
+		<p>
+			<center>SMOQ &copy 2018</center>
+		</p>
+	</div>
+</footer>
+</div>
+
+<script
+src="js/jquery-3.3.1.min.js"
+
+></script>
+<script src="js/semantic.min.js"></script>
+<script>
+	$('.ui.sidebar').sidebar('attach events','#openmenu','toggle');
+	$('.ui.accordion').accordion();
+</script>
+<script src="js/Chart.min.js"></script>
+<script src="js/ozonChart.js">
+</script>
+</body>
+</html>
